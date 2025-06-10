@@ -1,0 +1,24 @@
+name: Deploy static to production
+
+on:
+  push:
+    branches:
+    - main
+
+env:
+  NODE_VERSION: 18.x
+  SKIP_PREFLIGHT_CHECK: true
+
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+        - name: GoFastAPI Deploy
+          run: |
+            npm ci --legacy-peer-deps
+            npm run build
+            npx gofastapi login --auth-token=${{ secrets.GOFASTAPI_AUTH_TOKEN }}
+            npx gofastapi clean
+            npx gofastapi deploy
