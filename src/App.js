@@ -17,12 +17,12 @@ const App = () => {
     const fetchData = async () => {
       try {
         // Fetch orders
-        const ordersResponse = await fetch(`https://tajmahal-server.gofastapi.com/getOrders`);
+        const ordersResponse = await fetch(`https://vwdciv1cv0.execute-api.eu-west-3.amazonaws.com/getOrders`);
         if (!ordersResponse.ok) throw new Error(`Error fetching orders: ${ordersResponse.statusText}`);
         const ordersData = await ordersResponse.json();
 
         // Fetch reservations
-        const reservationsResponse = await fetch(`https://tajmahal-server.gofastapi.com/getReservations`);
+        const reservationsResponse = await fetch(`https://vwdciv1cv0.execute-api.eu-west-3.amazonaws.com/getReservations`);
         if (!reservationsResponse.ok) throw new Error(`Error fetching reservations: ${reservationsResponse.statusText}`);
         const reservationsData = await reservationsResponse.json();
 
@@ -129,7 +129,7 @@ const App = () => {
   // Action handlers (unchanged)
   const handleMarkAsDelivered = async (orderId) => {
     try {
-      const response = await fetch(`https://tajmahal-server.gofastapi.com/markAsDelivered`, {
+      const response = await fetch(`https://vwdciv1cv0.execute-api.eu-west-3.amazonaws.com/markAsDelivered`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -155,7 +155,7 @@ const App = () => {
   const handleSendTimeEstimate = async (orderId, email) => {
     try {
       const selectedTime = timeSelections[orderId] || "10";
-      const response = await fetch(`https://tajmahal-server.gofastapi.com/timeDetails`, {
+      const response = await fetch(`https://vwdciv1cv0.execute-api.eu-west-3.amazonaws.com/timeDetails`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
